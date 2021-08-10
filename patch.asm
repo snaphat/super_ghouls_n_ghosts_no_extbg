@@ -6,8 +6,8 @@ org $16B6D0
 ; Enable BG1 instead of BG2.
 pushpc
 {
-    org $00BB04 : db $11
-}
+     org $00BB04 : db $11 ; lvl 4.1
+     org $00BB05 : db $11 ; lvl 4.2
 pullpc
 
 ; Mask off high bit of tiles.
