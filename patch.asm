@@ -13,8 +13,12 @@ pullpc
 ; Mask off high bit of tiles.
 pushpc
 {
-    org  $00DBE4 : fillbyte $20
-    fill 16
+    ; lvl 4.1
+    org  $00DBE4 : fillbyte $20 : fill 16
+    ; lvl 4.2
+    org  $00DC25 : fillbyte $30 : fill 27
+    org  $00DC44 : fillbyte $20 : fill 16
+    org  $00DC56 : fillbyte $40 : fill 06
 }
 pullpc
 
