@@ -9,6 +9,7 @@ pushpc
     org $03B29E : db $11 ; lvl 3 boss
     org $00BB04 : db $11 ; lvl 4.1
     org $00BB05 : db $11 ; lvl 4.2
+}
 pullpc
 
 ; Mask off high bit of tiles.
