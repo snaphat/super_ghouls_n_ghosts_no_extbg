@@ -6,8 +6,9 @@ org $16B6D0
 ; Enable BG1 instead of BG2.
 pushpc
 {
-     org $00BB04 : db $11 ; lvl 4.1
-     org $00BB05 : db $11 ; lvl 4.2
+    org $03B29E : db $11 ; lvl 3 boss
+    org $00BB04 : db $11 ; lvl 4.1
+    org $00BB05 : db $11 ; lvl 4.2
 pullpc
 
 ; Mask off high bit of tiles.
@@ -22,23 +23,23 @@ pushpc
 }
 pullpc
 
-; Increase priority of sprites.
-sprite_priority_increase:
-{
-    ora #$1000
-    sta $7e2006, x
-    rtl
-}
+; ; Increase priority of sprites.
+; sprite_priority_increase:
+; {
+;     ora #$1000
+;     sta $7e2006, x
+;     rtl
+; }
 
-; increase priority of sprites
-pushpc
-{
-    ; Change mask off value from $FC to $FF.
-    org $0187DB : db $FF
+; ; increase priority of sprites
+; pushpc
+; {
+;     ; Change mask off value from $FC to $FF.
+;     org $0187DB : db $FF
 
-    ; Jump to new code.
-    org $058140
-    jsl sprite_priority_increase
+;     ; Jump to new code.
+;     org $058140
+;     jsl sprite_priority_increase
 
-}
-pullpc
+; }
+; pullpc
