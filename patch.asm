@@ -13,7 +13,6 @@ pushpc
 pullpc
 
 ; Mask off high bit of tiles.
-
 pushpc
 {
     ; lvl 3 boss
@@ -1115,23 +1114,37 @@ pushpc
 }
 pullpc
 
-; ; Increase priority of sprites.
-; sprite_priority_increase:
-; {
-;     ora #$1000
-;     sta $7e2006, x
-;     rtl
-; }
-
-; ; increase priority of sprites
-; pushpc
-; {
-;     ; Change mask off value from $FC to $FF.
-;     org $0187DB : db $FF
-
-;     ; Jump to new code.
-;     org $058140
-;     jsl sprite_priority_increase
-
-; }
-; pullpc
+; Increase priority of sprites for lvl 4.1 and 4.2.
+sprite_priority_increase:
+{
+    pha
+    ; Load current level ID.
+    lda $0028D
+    ; Check if level ID = 3 (lvl 4.1)
+    cmp #$0003
+    bne +
+    -:
+    ; Switch sprite priority
+    pla
+    ora #$1000
+    bra ++
+    +
+    ; Check if level ID = 4 (lvl 4.2)
+    cmp #$0004
+    beq -
+    pla
+    ++
+    sta $7e2006, x
+    rtl
+}
+pushpc
+{
+    ; Change mask off value from $FC to $FF.
+    org $0187DB : db $FF
+;
+    ; Jump to new code.
+    org $058140
+    jsl sprite_priority_increase
+;
+}
+pullpc
